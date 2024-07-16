@@ -159,30 +159,28 @@ main{
 
 .order-price{
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    display: none;
-    
+ 
 }
 
-#amount{
+.amount{
     margin-right: 1rem;
     color: hsl(14, 86%, 42%);
     font-weight: 700;
 }
 
-#title-list{
+.title-list{
     color: black;
     font-weight: 500;
 
     margin-bottom: .3rem;
 }
 
-#pricePerDessert{
+.pricePerDessert{
     margin-right: 1rem;
 }
 
-#total-price{
+.total-price{
     font-weight: bold;
 }
 
@@ -276,6 +274,10 @@ hr{
     height: 40px;
     margin-right: auto;
     margin-bottom: 1rem;
+}
+
+.total-price-per-dessert{
+    font-weight: bold;
 }
 
 @media screen and (max-width:1168px) {
