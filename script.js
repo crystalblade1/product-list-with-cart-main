@@ -82,16 +82,13 @@ $(document).ready(function () {
   let cart = [];
 
   function addToCart(title, price, amount) {
-    const existingItem = cart.find(item => item.title === title);
-    if (existingItem) {
-        existingItem.amount += amount;
-    } else {
-        cart.push({ title, price, amount });
-    }
+    cart.push({ title, price, amount });
     updateTotalPrice();
     renderCart();
   }
 
+// Update the Amount per dessert -----------------------------------------------------------
+  
   function updateCartAmount(title, amount) {
     const item = cart.find(item => item.title === title);
     if (item) {
@@ -101,6 +98,8 @@ $(document).ready(function () {
     }
 }
 
+// Update the total price and the cart counter ---------------------------------------------
+
 function updateTotalPrice() {
     let totalAmount = 0;
     total = cart.reduce((sum, item) => sum + item.price * item.amount, 0);
@@ -108,6 +107,8 @@ function updateTotalPrice() {
     $('#total-order-price').text(`$${total.toFixed(2)}`);
     $('.sidebar h3').text(`Your cart (${totalAmount})`);
 }
+
+// Create the new item container -----------------------------------------------------------
 
   function renderCart() {
     let cartItems = $(".list");
@@ -127,13 +128,16 @@ function updateTotalPrice() {
           `);
     });
 
-    $('.close').click(function() {
-        const title = $(this).siblings('.title-list').text();
-        cart = cart.filter(item => item.title !== title);
-        console.log(cart)
-        updateTotalPrice();
-        renderCart();
-    });
+// Remove dessert from cart ----------------------------------------------------------------
+
+$('.list').on('click', '.close', function() {
+  const title = $(this).siblings('.title-list').text();
+  cart = cart.filter(item => item.title !== title);
+  console.log(cart);
+  updateTotalPrice();
+  renderCart();
+});
+
   }
 
 
