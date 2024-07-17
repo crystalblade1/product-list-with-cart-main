@@ -6,7 +6,6 @@ let totalPrice;
 $(document).ready(function () {
   $(".d-cart").click(function () {
     $(".list").show();
-    $(".d-cart2").hide();
     $(".d-cart").show();
     $("#order-total").show();
     $("#order-button").show();
@@ -47,7 +46,13 @@ $(document).ready(function () {
         .text(amount - 1);
       amount--;
       updateCartAmount($(this).closest('.grid').find('.title-desserts .title').text(), amount);
-    }
+    }// }else{
+    //   $(this)
+    //   .next(".cart-number")
+    //   .text(amount - 1);
+    //   $(this).parent('.d-cart2').hide();
+    //   $(this).parent('d-cart2').sibling('.d-cart').show();
+    // }
   });
 
 //   Increment counter --------------------------------------------------------------------
@@ -97,9 +102,11 @@ $(document).ready(function () {
 }
 
 function updateTotalPrice() {
+    let totalAmount = 0;
     total = cart.reduce((sum, item) => sum + item.price * item.amount, 0);
+    totalAmount = cart.reduce((sum, item) => sum + item.amount, 0);
     $('#total-order-price').text(`$${total.toFixed(2)}`);
-    $('.sidebar h3').text(`Your cart (${cart.length})`);
+    $('.sidebar h3').text(`Your cart (${totalAmount})`);
 }
 
   function renderCart() {
@@ -121,8 +128,9 @@ function updateTotalPrice() {
     });
 
     $('.close').click(function() {
-        const title = $(this).closest('.order-price').prev('.title-list').text();
+        const title = $(this).siblings('.title-list').text();
         cart = cart.filter(item => item.title !== title);
+        console.log(cart)
         updateTotalPrice();
         renderCart();
     });
